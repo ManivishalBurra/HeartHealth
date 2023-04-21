@@ -1,0 +1,105 @@
+html{
+	scrollbar-width: none;
+}
+
+@font-face {
+	font-family: "Medium";   /*Can be any text*/
+	src: local("SansitaOne"),
+	  url("../fonts/sansita-one/SansitaOne.ttf") format("truetype");
+  }
+  
+body{
+    font-family: 'Poppins', sans-serif;
+	font-size: 16px;
+	line-height: 24px;
+	font-weight: 400;
+	color: #212112;
+	background-position: center;
+	background-repeat: repeat;
+	background-size: 7%;
+	background-color: #fdd9da;
+	/* background-color: #fff284; */
+	overflow-x: hidden;
+    transition: all 200ms linear;
+    margin: 0;
+}
+.ant-header-custom {
+    box-shadow: 0 5px 10px 0 rgba(138, 155, 165, 0.15);
+    background-color: white;
+    
+}
+.custom-sider{
+    border-right: 1px solid #dadada;
+	flex: 0 0 2000px;
+}
+.menu-style {
+	height: 100vh!important;
+	width: 200px;
+	position: fixed;
+}
+.center {
+	display: flex!important;
+	align-items: center!important;
+	justify-content: center!important;
+}
+.truck{
+	align-items: center!important;
+	justify-content: center!important;
+	background-image: url('../images/heart.jpg');
+	height: 115%;
+    width: 100%;
+    position: absolute;
+    z-index: -1;
+    object-fit: cover;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	background-position: right 0px bottom 0px;
+	font-family: 'Nunito';
+	font-weight: bold!important;
+	font-size: 50px;
+	padding: 10px;
+	color: rgb(255, 255, 255);
+	flex-direction: column;
+}
+.truck p {
+	filter: drop-shadow(-2px 2px 29px rgba(47, 47, 47, 0.5));
+	margin-left: 15%;
+}
+.order-create {
+	width: 70%;
+    height: 180px;
+    background-color: white;
+    position: relative;
+    top: 38%;
+    left: 10%;
+    border-radius: 25px;
+	filter: drop-shadow(-2px 2px 29px rgba(47, 47, 47, 0.5));
+	padding: 30px;
+}
+.shadow{
+	filter: drop-shadow(-2px 2px 0px rgba(47, 47, 47, 0));
+}
+.ant-menu-title-content {
+	display: flex!important;
+	align-items: center!important;
+	justify-content: center!important;
+}
+.ant-select-selector{
+	background-color: #EEEEEE!important;
+    height: 40px!important;
+    border-radius: 20px!important;
+}
+
+.login {
+	background-image: url('../images/login2.jpg');
+}
+
+.ant-input-number-input-wrap {
+	height: 100%;
+    display: flex;
+    align-items: center;
+}
+.ant-select-selection-item {
+	display: flex;
+    align-items: center;
+}
