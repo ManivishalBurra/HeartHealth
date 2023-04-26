@@ -4,12 +4,6 @@ const app = express();
 const server = require("http").createServer(app);
 const bodyParser = require("body-parser");
 const cors = require("cors");
-const io = require("socket.io")(server, {
-  cors: {
-    origin: "*",
-  },
-});
-const { userJoin } = require("./utils/users");
 
 app.use(cors());
 app.use(bodyParser.json());

@@ -1,0 +1,13 @@
+version: '3'
+
+services:
+  web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "6303:6303"
+    volumes:
+      - /usr/app/node_modules
+      - .:/usr/app
+    restart: always  
