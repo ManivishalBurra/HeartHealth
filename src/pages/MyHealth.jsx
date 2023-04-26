@@ -68,6 +68,11 @@ const MyHealth = () => {
             key: 'slope',
         },
         {
+            title: 'Results',
+            dataIndex: 'result',
+            key: 'result',
+        },
+        {
             title: 'Created On',
             dataIndex: 'createdOn',
             key: 'createdOn',

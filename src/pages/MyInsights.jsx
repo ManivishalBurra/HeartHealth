@@ -13,6 +13,7 @@ const MyInsights = () => {
     const [form] = Form.useForm();
     const [dataSource, setDataSource] = useState([]);
     const [userDataSource, setUserDataSource] = useState([]);
+    const [newColumns, setNewColumns] = useState([]);
     const [userName, setUserName] = useState("");
     const [open , setOpen] = useState(false);
     const navigate = useNavigate();
@@ -22,6 +23,35 @@ const MyInsights = () => {
     const onClose = () => {
         setOpen(false);
     };
+    const apColumns = [
+        {
+            title: 'Doctor Name',
+            dataIndex: 'doctorName',
+            key: 'doctorName',
+        },
+        {
+            title: 'Specialisation',
+            dataIndex: 'specialisation',
+            key: 'specialisation',
+        },
+        {
+            title: 'Creation On',
+            dataIndex: 'appointment',
+            key: 'appointment',
+        },
+
+      ]
+    const showAppointmentsDrawer = () => {
+        axios.get(`${BASE_URL2}/appointment/fetch?id=${id}`)
+        .then((res)=>{
+            setNewColumns(apColumns)
+            setUserDataSource(res.data);
+            setOpen(true);
+            setUserName(username)
+        }).catch((err) => {
+            console.log(err);
+        })
+    }
     const columns = [
         {
           title: 'Name',
@@ -42,11 +72,14 @@ const MyInsights = () => {
             title: 'Action',
             key: 'action',
             render: (data) => (
-                <Button onClick={()=>showDrawer(data._id, data.username)}>Info</Button>
+                <>
+                <Button onClick={()=>showDrawer(data._id, data.username)}>Reports</Button>
+                <Button onClick={()=>showAppointmentsDrawer(data._id, data.username)}>Appointments</Button>
+                </>
             ),
           },
       ];
-      const newColumns = [
+      const reportColumns = [
         {
           title: 'CA',
           dataIndex: 'ca',
@@ -104,9 +137,11 @@ const MyInsights = () => {
         },
 
       ];
+      
       const showDrawer = (id, username) => {
         axios.get(`${BASE_URL2}/report/fetch?id=${id}`)
         .then((res)=>{
+            setNewColumns(reportColumns)
             setUserDataSource(res.data);
             setOpen(true);
             setUserName(username)
