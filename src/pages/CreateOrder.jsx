@@ -58,33 +58,32 @@ const CreateOrder = () => {
       };
     const RequestAction = () => {
         
-        // axios.post(`${BASE_URL}/api/predict`, {
-        //    ...orderDetails,
-        // })
-        // .then(function (response) {
-        //   if( (response && response.data) ) {
-        //     axios.post(`${BASE_URL2}/report/create?id=${localStorage.getItem('accessToken')}`,{
-        //       ...orderDetails,
-        //       result: response.data[0]
-        //       }).then((resp) => {
-        //         console.log(resp);
-        //       }).catch((err) => {
-        //         console.log(err);
-        //       })
-        //     if(response.data[0]>40){
-        //       setPercentage(response.data[0].toFixed(2)+ "%, Please Consult a doctor immediately!")
-        //       setSux(false)
-        //     }else{
-        //       setPercentage("Wow your heart looks happy!")
-        //       setSux(true)
-        //     }
-        //     setTestOrderSuccess(true)
-        //   }
-        // })
-        // .catch(function (error) {
-        //     console.log(error);
-        // });
-        setTestOrderSuccess(true)
+        axios.post(`${BASE_URL}/api/predict`, {
+           ...orderDetails,
+        })
+        .then(function (response) {
+          if( (response && response.data) ) {
+            axios.post(`${BASE_URL2}/report/create?id=${localStorage.getItem('accessToken')}`,{
+              ...orderDetails,
+              result: response.data[0]
+              }).then((resp) => {
+                console.log(resp);
+              }).catch((err) => {
+                console.log(err);
+              })
+            if(response.data[0]>40){
+              setPercentage(response.data[0].toFixed(2)+ "%, Please Consult a doctor immediately!")
+              setSux(false)
+            }else{
+              setPercentage("Wow your heart looks happy!")
+              setSux(true)
+            }
+            setTestOrderSuccess(true)
+          }
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
     }
 
     return (
