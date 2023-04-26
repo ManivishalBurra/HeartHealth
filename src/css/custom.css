@@ -103,3 +103,15 @@ body{
 	display: flex;
     align-items: center;
 }
+.consultdoctor {
+	align-items: center!important;
+	justify-content: center!important;
+	background-image: url('../images/414.jpg');
+	height: 100%;
+    width: 100%;
+    object-fit: cover;
+	background-repeat: no-repeat;
+	background-size: 100% auto;
+	color: rgb(255, 255, 255);
+	flex-direction: column;
+}

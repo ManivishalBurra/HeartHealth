@@ -1,14 +1,19 @@
-import React, { Component } from 'react';
+import React, { Component, useEffect } from 'react';
 import { Menu, Icon, Form, Input, InputNumber, Button, DatePicker, Select } from 'antd';
 import { useNavigate } from "react-router-dom";
 import Navbar from '../components/Navbar';
 import "../css/custom.css";
 import { backgroundColor, primaryColor, secondaryColor } from ".././constants/style"
+import CheckAuthorization from '../utils/authorization';
+
 const Home = () => {
     const [form] = Form.useForm();
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    useEffect(()=>{
+      navigate(CheckAuthorization());
+    },[0])
     const CreateOrder = (e) => {
-        navigate(`/createorder/${e.cp}/${e.bloodPressure}/${e.serum}/${new Date(e.birthDate).toISOString()}/${e.gender}`)
+        navigate(`/predict/${e.cp}/${e.bloodPressure}/${e.serum}/${new Date(e.birthDate).toISOString()}/${e.gender}`)
     }
     const onChange = (date, dateString) => {
       console.log(date, dateString);

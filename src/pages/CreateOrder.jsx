@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { Component, useEffect, useState } from 'react';
 import { Menu, Icon, Form, Input, Button, DatePicker, Select, InputNumber, Descriptions, Steps, Modal, Result } from 'antd';
 import { Truck, Notification, HeartSearch, Profile2User, BoxAdd } from 'iconsax-react';
 import moment from 'moment';
@@ -8,16 +8,19 @@ import dayjs from 'dayjs';
 import "../css/custom.css";
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { backgroundColor, primaryColor, secondaryColor } from ".././constants/style"
-import { BASE_URL } from ".././constants/url"
+import { BASE_URL, BASE_URL2 } from ".././constants/url"
+import CheckAuthorization from '../utils/authorization';
 const CreateOrder = () => {
     const [form] = Form.useForm();
     const navigate = useNavigate()
     let {cp, restbp, chol, birthDate, sex} = useParams();
-
+    useEffect(()=>{
+      navigate(CheckAuthorization());
+    },[0])
     birthDate = dayjs(moment(birthDate))
     const [isModalOpen, setIsModalOpen] = useState(false);
     const [orderDetails, setOrderDetails] = useState({})
-    const [testOrderSuccess, setTestOrderSuccess] = useState(true)
+    const [testOrderSuccess, setTestOrderSuccess] = useState(false)
     const [percentage, setPercentage] = useState("10%")
     const [sux, setSux] = useState(false)
     const CreateOrderWithSummary = (e) => {
@@ -47,7 +50,7 @@ const CreateOrder = () => {
     const handleOk = () => {
         setIsModalOpen(false);
         setTestOrderSuccess(false);
-      };
+    };
     
     const handleCancel = () => {
         setIsModalOpen(false);
@@ -55,24 +58,33 @@ const CreateOrder = () => {
       };
     const RequestAction = () => {
         
-        axios.post(`${BASE_URL}/api/predict`, {
-           ...orderDetails,
-        })
-        .then(function (response) {
-          if( response && response.data ){
-            if(response.data[0]>40){
-              setPercentage(response.data[0].toFixed(2)+ "%, Please Consult a doctor immediately!")
-              setSux(false)
-            }else{
-              setPercentage("Wow your heart looks happy!")
-              setSux(true)
-            }
-            setTestOrderSuccess(true)
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
+        // axios.post(`${BASE_URL}/api/predict`, {
+        //    ...orderDetails,
+        // })
+        // .then(function (response) {
+        //   if( (response && response.data) ) {
+        //     axios.post(`${BASE_URL2}/report/create?id=${localStorage.getItem('accessToken')}`,{
+        //       ...orderDetails,
+        //       result: response.data[0]
+        //       }).then((resp) => {
+        //         console.log(resp);
+        //       }).catch((err) => {
+        //         console.log(err);
+        //       })
+        //     if(response.data[0]>40){
+        //       setPercentage(response.data[0].toFixed(2)+ "%, Please Consult a doctor immediately!")
+        //       setSux(false)
+        //     }else{
+        //       setPercentage("Wow your heart looks happy!")
+        //       setSux(true)
+        //     }
+        //     setTestOrderSuccess(true)
+        //   }
+        // })
+        // .catch(function (error) {
+        //     console.log(error);
+        // });
+        setTestOrderSuccess(true)
     }
 
     return (
@@ -236,10 +248,10 @@ const CreateOrder = () => {
         status= {sux?"success":"error"}
         title={percentage}
         extra={[
-        <Button key ="console" style={{backgroundColor:"black", color:"white"}} onClick={()=>navigate("/")}>
-            Go Home
+        <Button key ="console" style={{backgroundColor:"black", color:"white"}} onClick={()=>navigate("/consult")}>
+            Consult a doctor
         </Button>,
-         <Button><Link to="https://familydoctor.org/diet-and-exercise-for-a-healthy-heart/">My Health</Link></Button>
+         <Button><Link to="/eatables">My Health</Link></Button>
         
         ]}
     />
